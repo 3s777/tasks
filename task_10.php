@@ -1,3 +1,23 @@
+<?php
+    if(!empty($_REQUEST["simpleinput"])) {
+        $text = trim(strip_tags(htmlspecialchars($_REQUEST["simpleinput"])));
+        $db = new PDO('mysql:host=localhost;dbname=tasks','root','');
+        $sql = "SELECT id FROM inputs WHERE text <=>:text";
+        $result = $db->prepare($sql);
+        $result->bindValue(':text', $text);
+        $result->execute();
+        $inputs = $result->fetchAll(PDO::FETCH_ASSOC);
+        $error = '';
+        if(count($inputs) > 0) {
+            $error = true;
+        } else {
+            $sql = "INSERT INTO inputs (text) VALUES (:text)";
+            $result = $db->prepare($sql);
+            $result->bindValue(':text', $text);
+            $result->execute();
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,12 +54,14 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <div class="alert alert-danger fade show" role="alert">
-                                        You should check in on some of those fields below.
-                                    </div>
-                                    <form action="">
+                                    <?php if($error) { ?>
+                                        <div class="alert alert-danger fade show" role="alert">
+                                            You should check in on some of those fields below.
+                                        </div>
+                                    <?php } ?>
+                                    <form action="/task_10.php" method="POST">
                                         <label class="form-label" for="simpleinput">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
+                                        <input type="text" id="simpleinput" name="simpleinput" class="form-control">
                                         <button class="btn btn-success mt-3">Submit</button>
                                     </form>
                                 </div>
