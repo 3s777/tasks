@@ -32,34 +32,22 @@
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
-                            <div class="d-flex mt-2">
-                                My Tasks
-                                <span class="d-inline-block ml-auto">130 / 500</span>
-                            </div>
-                            <div class="progress progress-sm mb-3">
-                                <div class="progress-bar bg-fusion-400" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex">
-                                Transfered
-                                <span class="d-inline-block ml-auto">440 TB</span>
-                            </div>
-                            <div class="progress progress-sm mb-3">
-                                <div class="progress-bar bg-success-500" role="progressbar" style="width: 34%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex">
-                                Bugs Squashed
-                                <span class="d-inline-block ml-auto">77%</span>
-                            </div>
-                            <div class="progress progress-sm mb-3">
-                                <div class="progress-bar bg-info-400" role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="d-flex">
-                                User Testing
-                                <span class="d-inline-block ml-auto">7 days</span>
-                            </div>
-                            <div class="progress progress-sm mb-g">
-                                <div class="progress-bar bg-primary-300" role="progressbar" style="width: 84%;" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <?php
+                                $progressbars = [
+                                        ['title'=>'My Tasks', 'value'=>'130 / 500', 'progress'=>'65', 'class'=>'bg-fusion-400'],
+                                        ['title'=>'Transfered', 'value'=>'440 TB', 'progress'=>'34', 'class'=>'bg-success-500'],
+                                        ['title'=>'Bugs Squashed', 'value'=>'77%', 'progress'=>'77', 'class'=>'bg-info-400'],
+                                        ['title'=>'User Testing', 'value'=>'7 days', 'progress'=>'84', 'class'=>'bg-primary-300']
+                                    ];
+                                foreach($progressbars as $progressbar) { ?>
+                                    <div class="d-flex mt-2">
+                                        <?php echo $progressbar['title']; ?>
+                                        <span class="d-inline-block ml-auto"><?php echo $progressbar['value']; ?></span>
+                                    </div>
+                                    <div class="progress progress-sm mb-3">
+                                        <div class="progress-bar <?php echo $progressbar['class']; ?>" role="progressbar" style="width: <?php echo $progressbar['progress']; ?>%;" aria-valuenow="<?php echo $progressbar['progress']; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
