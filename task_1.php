@@ -44,18 +44,18 @@
                                         </div>
                                     </div>
                                     <ul id="js-list-msg" class="list-group px-2 pb-2 js-list-filter">
-                                        <li class="list-group-item">
-                                            <span data-filter-tags="reports file">Reports</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span data-filter-tags="analytics graphs">Analytics</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span data-filter-tags="export download">Export</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span data-filter-tags="storage">Storage</span>
-                                        </li>
+                                        <?php
+                                            $filter_items = [
+                                                    ['tags'=>'file', 'title' => 'Reports'],
+                                                    ['tags'=>'graphs', 'title' => 'Analytics'],
+                                                    ['tags'=>'download', 'title' => 'Export'],
+                                                    ['tags'=>'', 'title' => 'Storage'],
+                                            ];
+                                            foreach ($filter_items as $item) { ?>
+                                                <li class="list-group-item">
+                                                    <span data-filter-tags="<?php echo strtolower($item['title']).' '.$item['tags']; ?>"><?php echo $item['title']; ?></span>
+                                                </li>
+                                            <?php } ?>
                                     </ul>
                                     <div class="filter-message js-filter-message mt-0 fs-sm"></div>
                                 </div>
