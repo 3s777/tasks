@@ -33,9 +33,19 @@
                     <div class="panel-container show">
                         <div class="panel-content">
                             <ol class="breadcrumb page-breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Главная</a></li>
-                                <li class="breadcrumb-item"><a href="#">PHP</a></li>
-                                <li class="breadcrumb-item active">Функции</li>
+                                <?php
+                                    $breadcrumbs = [
+                                        ['link' => '#', 'title' => 'Главная'],
+                                        ['link' => '#', 'title' => 'PHP'],
+                                        ['link' => '', 'title' => 'Функции'],
+                                    ];
+                                    foreach ($breadcrumbs as $breadcrumb) {
+                                        if(!empty($breadcrumb['link'])) { ?>
+                                            <li class="breadcrumb-item"><a href="<?php echo $breadcrumb['link']; ?>"><?php echo $breadcrumb['title']; ?></a></li>
+                                        <?php } else { ?>
+                                            <li class="breadcrumb-item active"><?php echo $breadcrumb['title']; ?></li>
+                                        <?php } ?>
+                                    <?php } ?>
                             </ol>
                         </div>
                     </div>
