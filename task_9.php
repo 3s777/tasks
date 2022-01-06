@@ -1,3 +1,13 @@
+<?php
+if(!empty($_REQUEST["simpleinput"])) {
+    $text = trim(strip_tags(htmlspecialchars($_REQUEST["simpleinput"])));
+    $db = new PDO('mysql:host=localhost;dbname=tasks','root','');
+    $sql = "INSERT INTO inputs (text) VALUES (:text)";
+    $result = $db->prepare($sql);
+    $result->bindValue(':text', $text);
+    $result->execute();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +45,9 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <form action="">
+                                    <form action="/task_9.php" method="POST">
                                         <label class="form-label" for="simpleinput">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
+                                        <input type="text" id="simpleinput" name="simpleinput" class="form-control">
                                         <button class="btn btn-success mt-3">Submit</button>
                                     </form>
                                 </div>
